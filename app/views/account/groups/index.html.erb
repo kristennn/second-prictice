@@ -1,0 +1,24 @@
+<div class="col-md-12">
+ <h2 class="text-center">加入的群组</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Creator</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @groups.each do |group| %>
+      <tr>
+        <td>#</td>
+        <td><%= link_to(group.title, group_path(group)) %></td>
+        <td><%= group.description %></td>
+        <td><%= group.user.email %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
