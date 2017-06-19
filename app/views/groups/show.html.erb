@@ -2,6 +2,13 @@
   <div class="show-header">
     <h2><%= @group.title %></h2>
     <p><%= @group.description %></p>
+    <div class="pull-right">
+      <% if current_user && current_user.is_member_of?(@group) %>
+        <label>群组成员</label>
+      <% else %>
+        <label>不是群组成员</label>
+      <% end %>
+    </div>
     <%= link_to("Write a Post", new_group_post_path(@group), class: "btn btn-primary pull-right") %>
     <table class="table">
       <thead>
