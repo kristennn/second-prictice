@@ -45,6 +45,28 @@ before_action :authenticate_user!, :only => [:new, :create, :edit, :destroy, :up
     redirect_to groups_path
   end
 
+  def join
+    @group = Group.find(params[:id])
+    if current_user.is_member_of?(@group)
+      flash[:warning] = "你已是本讨论版成员"
+    else
+      current_user.join!(@group)
+      flash[:notice] = "加入讨论版成功"
+    end
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    if current_user.is_member_of?(@group)
+      current_user.quit!(@group)
+      flash[:alert] = "退出讨论版成功"
+    else
+      flash[:warning] = "你不是讨论版成员，怎么退出"
+    end
+    redirect_to group_path(@group)
+  end
+
   private
 
   def group_params

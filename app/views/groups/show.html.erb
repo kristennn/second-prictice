@@ -5,8 +5,10 @@
     <div class="pull-right">
       <% if current_user && current_user.is_member_of?(@group) %>
         <label>群组成员</label>
+        <%= link_to("Quit Group", quit_group_path(@group), method: :post, class: "btn btn-primary") %>        
       <% else %>
         <label>不是群组成员</label>
+        <%= link_to("Join Group", join_group_path(@group), method: :psot, class: "btn btn-primary") %>
       <% end %>
     </div>
     <%= link_to("Write a Post", new_group_post_path(@group), class: "btn btn-primary pull-right") %>
